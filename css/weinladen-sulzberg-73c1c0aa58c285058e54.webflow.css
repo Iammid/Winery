@@ -705,15 +705,15 @@ a {
   top: 49%;
   left: 50%;
   right: 50%;
-  transform: translate(-50%, -50%) rotate(0deg); /* Rotate the arrow tail to face upwards */
+  transform: translate(-50%, -50%) rotate(0deg);
   width: 0;
-  height: 15px; /* Length of the arrow tail */
-  border-left: 2px solid #ffffff; /* White line for the arrow tail */
+  height: 15px;
+  border-left: 2px solid #ffffff;
 }
 
 .download:hover {
-  width: 45px; /* Adjust the width on hover */
-  height: 45px; /* Adjust the height on hover */
+  width: 45px;
+  height: 45px;
 }
 
 .sign-in-link {
@@ -726,13 +726,13 @@ a {
   font-weight: 400;
   text-decoration: none;
   padding: 10px 15px;
-  position: relative; /* Added for positioning the hover effect */
-  transition: transform 0.3s ease; /* Added transition for the transform property */
+  position: relative;
+  transition: transform 0.3s ease;
 }
 
 .sign-in-link:hover {
   color: #23343b;
-  transform: translateX(5px); /* Move the text 5px to the right on hover */
+  transform: translateX(5px);
 }
 
 .sign-in-link.w--current {
@@ -744,12 +744,12 @@ a {
 }
 
 .sign-in-link:hover::after {
-  content: '→'; /* Added for the arrow hover effect */
+  content: '→';
   position: absolute;
   top: 50%;
-  right: -10px; /* Adjust this value to control the distance of the arrow */
+  right: -10px; 
   transform: translateY(-50%);
-  transition: right 0.3s ease; /* Added transition effect */
+  transition: right 0.3s ease;
 }
 
 .nav-link {

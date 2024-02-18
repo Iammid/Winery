@@ -21,6 +21,42 @@ html {
     font-size: 2.1rem;
   }
 
+  .sign-in-link {
+    color: #23343b;
+    letter-spacing: 1px;
+    text-indent: 0;
+    text-transform: uppercase;
+    font-family: franklin-gothic-urw-cond, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: none;
+    padding: 10px 15px;
+    position: relative; /* Added for positioning the hover effect */
+    transition: transform 0.3s ease; /* Added transition for the transform property */
+  }
+  
+  .sign-in-link:hover {
+    color: #23343b;
+    transform: translateX(5px); /* Move the text 5px to the right on hover */
+  }
+  
+  .sign-in-link.w--current {
+    color: var(--maroon);
+  }
+  
+  .sign-in-link.w--current:hover {
+    color: var(--maroon);
+  }
+  
+  .sign-in-link:hover::after {
+    content: '→'; /* Added for the arrow hover effect */
+    position: absolute;
+    top: 50%;
+    right: -10px; /* Adjust this value to control the distance of the arrow */
+    transform: translateY(-50%);
+    transition: right 0.3s ease; /* Added transition effect */
+  }
+
   .section.wide {
     height: auto;
     border: 1px none #8a141f;
