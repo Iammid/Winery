@@ -1,0 +1,230 @@
+ /* Custom CSS styles for the admin panel */
+ body {
+    background-color: #333;
+    color: #fff;
+}
+
+.vineyard-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.vineyard-card {
+    width: 200px;
+    height: 150px;
+    background-color: #444; /* Darker background for cards */
+    border: 1px solid #555; /* Slightly lighter border */
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    display: inline-block;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3); /* Lighter shadow */
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.filtered {
+    display: flex; /* Use flexbox to arrange cards horizontally */
+    flex-wrap: wrap; /* Allow cards to wrap to the next line if needed */
+    justify-content: flex-start; /* Align cards to the left */
+}
+
+#searchInput {
+    max-width: 400px; /* Set the maximum width for the search input */
+    width: 100%; /* Make the input field responsive to its container */
+    margin-left: 210px;
+}
+
+/* Custom CSS */
+#searchInput {
+    color: #fff; /* White font color by default */
+}
+
+.navbar-dark .navbar-toggler-icon {
+    background-color: transparent;
+}
+
+.vineyard-card:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Lighter shadow on hover */
+}
+
+.vineyard-card h4,
+.vineyard-card p {
+    margin: 0;
+    color: #fff;
+}
+
+.vineyard-cards {
+    text-align: center;
+}
+
+.vineyard-cards a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.add-card-button {
+    background-color: #ccc; /* Grayish color */
+    color: #333;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.add-card-button:hover {
+    background-color: #bbb; /* Darker gray on hover */
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #fff; /* Light text for nav links */
+}
+
+.navbar-dark .navbar-toggler-icon {
+    background-color: #fff; /* Light color for toggle button icon */
+}
+
+.navbar-dark .navbar-toggler {
+    border-color: #fff; /* Light color for toggle button border */
+}
+
+.modal-content {
+    background-color: #555; /* Darker background for modal */
+    color: #fff; /* Light text color for modal */
+}
+
+.modal-header {
+    border-bottom: 1px solid #777; /* Lighter border for modal header */
+}
+
+.modal-footer {
+    border-top: 1px solid #777; /* Lighter border for modal footer */
+}
+
+.modal-title {
+    color: #fff; /* Light text color for modal title */
+}
+
+.form-control {
+    background-color: #777; /* Darker background for form controls */
+    color: #fff; /* Light text color for form controls */
+    border: 1px solid #aaa; /* Lighter border for form controls */
+}
+ /* Custom styles for notification badge */
+ .badge-notification {
+    position: absolute;
+    top: 5px;
+    right: -5px;
+    padding: 3px 6px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+    font-size: 0.65rem;
+}
+
+.panel-container {
+    display: flex;
+    justify-content: space-between; /* Distribute space between panels */
+    align-items: center; /* Center items vertically */
+    max-width: calc(100% - 40px); /* Full width minus left and right padding */
+    margin: 40px auto 20px; /* Padding from top and center horizontally with margin above and below */
+    padding: 20px; /* Padding on each side */
+    justify-content: center;
+    text-align: center;
+}
+
+.panel {
+    flex: 1; /* Each panel takes equal space */
+    height: 100px; /* Set a fixed height for all panels */
+    background-color: #444; /* Dark background for the panel */
+    border: 1px solid #555; /* Lighter border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 15px; /* Padding inside the panels */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    color: #fff; /* Text color for content inside the panel */
+    display: flex; /* Enable flexbox for panel content */
+    flex-direction: column; /* Stack content vertically */
+    align-items: center; /* Center items horizontally */
+    justify-content: center;
+    align-items: center;
+
+}
+
+.panel:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+}
+
+.panel h3,
+.panel p {
+    margin: 0; /* Remove margin from elements inside the panel */
+}
+
+.panel-title {
+    margin-top: 10px; /* Add space between label and title */
+    font-size: 1.7em; /* Larger font size for the title */
+    font-weight: bold;
+}
+
+.panel-label {
+    margin-bottom: 5px; /* Add space between title and label */
+}
+
+.panel + .panel {
+    margin-left: 20px; /* Add spacing between panels */
+}
+
+.panel:nth-child(1) {
+    background-color: #f7b267; /* Deep Red */
+}
+
+.panel:nth-child(2) {
+    background-color: #f79d65; /* Rich Purple */
+}
+
+.panel:nth-child(3) {
+    background-color: #f27059; /* Burgundy */
+}
+
+.panel:nth-child(4) {
+    background-color: #f25c54; /* Burgundy */
+}
+.chart-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.chart {
+    width: 100%;
+    height: 300px;
+    background-color: #444; /* Dark background for the chart */
+    border: 1px solid #555; /* Lighter border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 15px; /* Padding inside the chart */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    color: #fff; /* Text color for content inside the chart */
+}
+.modal-backdrop.show {
+    opacity: 0.5; /* Reduced opacity when modal is open */
+    transition: opacity 0.3s ease-in-out; /* Smooth transition */
+}
+
+.modal-backdrop {
+    opacity: 1; /* Default opacity */
+    transition: opacity 0.3s ease-in-out; /* Smooth transition */
+}
+.spacer {
+    height: 20px; /* Adjust the height as needed */
+    width: 100%; /* Full width */
+}
+.white-icon {
+    color: white;
+    font-size: 30px; /* Adjust the font size as desired */
+    margin-top: 25px; /* Add more padding between the content and the icon */
+}

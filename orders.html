@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Orders</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <style>
+/* Custom styles for dark mode */
+body {
+  background-color: #333;
+  color: #fff;
+}
+.order-container {
+  max-height: 700px; /* Set max height for the container */
+  overflow-y: auto; /* Add vertical scrollbar */
+  margin-right: -5px; /* Add negative margin to compensate for card movement */
+}
+.order-card {
+  margin-bottom: 20px; /* Increase margin between cards for better spacing */
+  padding: 15px;
+  font-size: 16px;
+  background-color: #495057; /* Dark gray background */
+  border-color: #343a40; /* Darker border */
+  transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for transform and box-shadow */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  position: relative; /* Set position to relative for z-index */
+  z-index: 1; /* Set initial z-index */
+}
+.order-card:hover {
+  transform: translateX(-5px); /* Move card to the left slightly on hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Add shadow on hover for 3D effect */
+  z-index: 2; /* Increase z-index on hover */
+}
+.order-card .card-header {
+  background-color: #343a40; /* Darker background for header */
+  border-bottom-color: #495057; /* Lighter border for header */
+  display: flex; /* Use flexbox for positioning */
+  justify-content: space-between; /* Align content to the right */
+  align-items: center; /* Center vertically */
+}
+.order-card .card-title {
+  color: #fff; /* White text */
+}
+.availability-label {
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+.available {
+  background-color: #28a745; /* Green for available */
+}
+.unavailable {
+  background-color: #dc3545; /* Red for unavailable */
+}
+    /* Custom modal styles */
+    .modal-content {
+      background-color: #343a40; /* Dark mode background */
+      color: #fff; /* White text */
+    }
+    .modal-header {
+      border-bottom: none; /* Remove bottom border */
+    }
+    .modal-title {
+      color: #fff; /* White text for title */
+    }
+    .modal-body {
+      padding: 20px;
+    }
+    .modal-footer {
+      border-top: none; /* Remove top border */
+    }
+    .badge-notification {
+    position: absolute;
+    top: 5px;
+    right: -5px;
+    padding: 3px 6px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+    font-size: 0.65rem;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #fff; /* Light text for nav links */
+}
+
+.navbar-dark .navbar-toggler-icon {
+    background-color: #fff; /* Light color for toggle button icon */
+}
+
+.navbar-dark .navbar-toggler {
+    border-color: #fff; /* Light color for toggle button border */
+}
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="adminpanel.html">Admin Panel</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <!-- Email notification icon -->
+            <li class="nav-item position-relative">
+                <a class="nav-link" href="orders.html">
+                    <i class="fas fa-envelope"></i>
+                    <span class="badge badge-notification">3</span> <!-- Example for 3 new emails -->
+                </a>
+            </li>
+            <!-- Profile dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item text-light" href="#">Log Out</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">Customer Orders</h1>
+    <!-- Container for orders with scrollbar -->
+    <div class="order-container">
+      <!-- Order Cards -->
+      <div class="card order-card" data-toggle="modal" data-target="#orderModal1">
+        <div class="card-header">
+          Order #1
+          <span class="availability-label available">Available</span>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Customer Name: John Doe</h5>
+          <p class="card-text">Weingut: Example Winery</p>
+          <p class="card-text">Weinrebe: Example Grape</p>
+          <p class="card-text">Flaschenanzahl: 10</p>
+          <p class="card-text">johndoe@gmail.com</p>
+          <p class="card-text">Additional Message: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+      </div>
+      <div class="card order-card" data-toggle="modal" data-target="#orderModal1">
+        <div class="card-header">
+          Order #1
+          <span class="availability-label unavailable">unavailable</span>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Customer Name: John Doe</h5>
+          <p class="card-text">Weingut: Example Winery</p>
+          <p class="card-text">Weinrebe: Example Grape</p>
+          <p class="card-text">Flaschenanzahl: 10</p>
+          <p class="card-text">johndoe@gmail.com</p>
+          <p class="card-text">Additional Message: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+      </div>
+      <div class="card order-card" data-toggle="modal" data-target="#orderModal1">
+        <div class="card-header">
+          Order #1
+          <span class="availability-label available">Available</span>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Customer Name: John Doe</h5>
+          <p class="card-text">Weingut: Example Winery</p>
+          <p class="card-text">Weinrebe: Example Grape</p>
+          <p class="card-text">Flaschenanzahl: 10</p>
+          <p class="card-text">johndoe@gmail.com</p>
+          <p class="card-text">Additional Message: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+      </div>
+      <div class="card order-card" data-toggle="modal" data-target="#orderModal1">
+        <div class="card-header">
+          Order #1
+          <span class="availability-label unavailable">unavailable</span>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Customer Name: John Doe</h5>
+          <p class="card-text">Weingut: Example Winery</p>
+          <p class="card-text">Weinrebe: Example Grape</p>
+          <p class="card-text">Flaschenanzahl: 10</p>
+          <p class="card-text">johndoe@gmail.com</p>
+          <p class="card-text">Additional Message: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+      </div>
+
+      <!-- Repeat this card structure for each order -->
+      <!-- Sample Card -->
+      <!-- Repeat the card structure for additional orders -->
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="orderModal1" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="orderModalLabel">Order Confirmation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to allow this order?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="sendEmail('disallow')">Disallow</button>
+          <button type="button" class="btn btn-primary" onclick="sendEmail('allow')">Allow</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function sendEmail(action) {
+      var orderCard = $('.modal.show').find('.order-card');
+      var email = orderCard.find('p:nth-last-child(2)').text().trim(); // Extract email from second last paragraph
+      
+      var subject, body;
+      if (action === 'disallow') {
+        subject = "Order Disallowed";
+        body = "Sorry, your order has been declined.";
+      } else if (action === 'allow') {
+        subject = "Order Allowed";
+        body = "Your order has been transmitted and is allowed. This is the delivery date.";
+      }
+
+      var mailtoLink = "mailto:" + email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+      window.location.href = mailtoLink;
+    }
+  </script>
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

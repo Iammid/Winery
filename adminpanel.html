@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/adminstyle.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Admin Panel</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <!-- Email notification icon -->
+                <li class="nav-item position-relative">
+                    <a class="nav-link" href="orders.html">
+                        <i class="fas fa-envelope"></i>
+                        <span class="badge badge-notification">3</span> <!-- Example for 3 new emails -->
+                    </a>
+                </li>
+                <!-- Profile dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item text-light" href="#">Log Out</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="panel-container">
+        <div class="panel">
+            <div class="panel-content">
+                <p class="panel-label">Flaschenanzahl insgesamt</p>
+                <h3 class="panel-title">10654</h3>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-content">
+                <p class="panel-label">Gesamterlös</p>
+                <h3 class="panel-title">32.293 €</h3>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-content">
+                <p class="panel-label">Heutiger Ertrag</p>
+                <h3 class="panel-title">820 €</h3>
+            </div>
+        </div>
+        <div class="panel">
+            <div class="panel-content">
+                <p class="panel-label">Wareneingang</p>
+                <h3 class="panel-title">+ 232 Flaschen</h3>
+            </div>
+        </div>
+    </div>
+    
+    <div class="spacer"></div>
+
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <!-- Left Column for Vineyard Cards and Add Button -->
+            <div class="col-md-6">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search for a vineyard..." aria-label="Search for a vineyard..." id="searchInput">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="searchButton"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+                <div class="vineyard-container">
+                    <div class="vineyard-cards">
+                        <a href="table.html">
+                            <div class="vineyard-card">
+                                <h4>Weingut 1</h4>
+                                <p>Location: Vineyard 1</p>
+                                <i class="fas fa-wine-glass white-icon"></i> <!-- Wine glass icon -->
+                            </div>
+                        </a>
+                        <a href="table.html">
+                            <div class="vineyard-card">
+                                <h4>Weingut 2</h4>
+                                <p>Location: Vineyard 2</p>
+                                <i class="fas fa-wine-glass white-icon"></i> <!-- Wine glass icon -->
+                            </div>
+                        </a>
+                        <!-- Additional cards will be added here -->
+                    </div>
+                </div>
+                <!-- Add new card button -->
+                <div class="container text-center mt-4">
+                    <button id="addCardButton" class="add-card-button" title="Add Card" data-toggle="modal"
+                        data-target="#addCardModal">+</button>
+                </div>
+            </div>
+    
+            <!-- Right Column for Fake Earnings Diagram -->
+            <div class="col-md-6">
+                <div id="earningsDiagram" class="mt-4">
+                    <!-- Placeholder for the earnings diagram -->
+                    <h4>Daily Earnings</h4>
+                    <canvas id="earningsChart"></canvas> <!-- Assuming you will use Chart.js or similar -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="spacer"></div>
+
+    
+    
+
+    <!-- Add Card Modal -->
+    <div class="modal fade" id="addCardModal" tabindex="-1" role="dialog" aria-labelledby="addCardModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCardModalLabel">Add New Vineyard</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addCardForm">
+                        <div class="form-group">
+                            <label for="vineyardName">Vineyard Name</label>
+                            <input type="text" class="form-control" id="vineyardName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="vineyardLocation">Location</label>
+                            <input type="text" class="form-control" id="vineyardLocation" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="saveCardButton">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript libraries -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script src="js/adminscript.js"></script>
+</body>
+
+</html>

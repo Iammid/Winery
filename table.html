@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wine Inventory</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wine Inventory</title>
+    <!-- Bootstrap dark mode CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/darkly/bootstrap.min.css" rel="stylesheet">
+    <!-- Select2 dark mode CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <!-- DataTables dark mode CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+    <!-- Custom dark mode CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Dark mode styles */
+        body, .form-control, .select2-container--default .select2-selection--single, input[type="checkbox"] {
+            background-color: #333 !important;
+            color: #fff !important;
+        }
+        table.dataTable th,
+        table.dataTable td {
+            color: #fff !important;
+            background-color: #444 !important;
+        }
+        table.dataTable thead th {
+            background-color: #555 !important;
+        }
+        input[type="checkbox"] {
+            border-color: #f25c54; /* Red color for checkbox border */
+            background-color: #f25c54; /* Red color for checkbox background */
+            box-shadow: none; /* Remove the default box shadow */
+        }
+        .dataTables_wrapper .dataTables_length select {
+            color: white;
+        }
+        .dataTables_wrapper .dataTables_filter input {
+            color: white;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: white;
+        }
+        .select2-search--dropdown {
+            background-color: #333;
+            color: white;
+            border-color: white;
+        }
+        .select2-container--default .select2-search--dropdown .select2-search__field {
+            color: white;
+            background-color: #333;
+            border-color: transparent;
+        }
+        .form-control {
+            border-color: white;
+        }
+        .select2-container--default .select2-results__option[aria-selected="true"] {
+            background-color:#333;
+        }
+        .select2-results__option[aria-selected] {
+            background-color: #333;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate {
+            background-color: #333 !important;
+            color: white !important;
+            border-color: white;
+            background: #333 !important;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+            background-color: #333 !important;
+        }
+        .badge-notification {
+    position: absolute;
+    top: 5px;
+    right: -5px;
+    padding: 3px 6px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+    font-size: 0.65rem;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #fff; /* Light text for nav links */
+}
+
+.navbar-dark .navbar-toggler-icon {
+    background-color: #fff; /* Light color for toggle button icon */
+}
+
+.navbar-dark .navbar-toggler {
+    border-color: #fff; /* Light color for toggle button border */
+}
+
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="adminpanel.html">Admin Panel</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <!-- Email notification icon -->
+                <li class="nav-item position-relative">
+                    <a class="nav-link" href="orders.html">
+                        <i class="fas fa-envelope"></i>
+                        <span class="badge badge-notification">3</span> <!-- Example for 3 new emails -->
+                    </a>
+                </li>
+                <!-- Profile dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item text-light" href="#">Log Out</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <h2>Wine Inventory</h2>
+        <div class="form-group">
+            <label for="inventorySelect">Filter:</label>
+            <select class="form-control" id="inventorySelect">
+                <option value="all">All</option>
+                <option value="inventory">Inventory</option>
+                <option value="shop">Shop</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="wineSelect">Select Wine:</label>
+            <select class="form-control" id="wineSelect">
+                <option value="all">All Wines</option>
+                <option value="Frank Rosso">Frank Rosso</option>
+                <option value="Barbera">Barbera</option>
+                <option value="Sangiovese">Sangiovese</option>
+                <option value="Cuvee R">Cuvee R</option>
+                <option value="Prosecco Spumante Treviso DOC">Prosecco Spumante Treviso DOC</option>
+            </select>
+        </div>
+        <table id="wineTable" class="table">
+            <thead>
+                <tr>
+                    <th>Count</th>
+                    <th>Wine</th>
+                    <th>Grape Amount</th>
+                    <th>Price</th>
+                    <th>In Inventory</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td>Frank Rosso</td>
+                    <td>50 bottles</td>
+                    <td>$20</td>
+                    <td><input type="checkbox" checked data-inventory="true"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Barbera</td>
+                    <td>30 bottles</td>
+                    <td>$25</td>
+                    <td><input type="checkbox" checked data-inventory="true"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Sangiovese</td>
+                    <td>40 bottles</td>
+                    <td>$18</td>
+                    <td><input type="checkbox" checked data-inventory="true"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Cuvee R</td>
+                    <td>20 bottles</td>
+                    <td>$30</td>
+                    <td><input type="checkbox" checked data-inventory="true"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Prosecco Spumante Treviso DOC</td>
+                    <td>60 bottles</td>
+                    <td>$15</td>
+                    <td><input type="checkbox" checked data-inventory="true"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Prosecco</td>
+                    <td>60 bottles</td>
+                    <td>$15</td>
+                    <td><input type="checkbox" checked data-inventory="true"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Spumante Anna </td>
+                    <td>60 bottles</td>
+                    <td>$15</td>
+                    <td><input type="checkbox" checked data-inventory="true"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Champange</td>
+                    <td>60 bottles</td>
+                    <td>$15</td>
+                    <td><input type="checkbox" checked data-inventory="true"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Weißwein</td>
+                    <td>60 bottles</td>
+                    <td>$15</td>
+                    <td><input type="checkbox" checked data-inventory="true"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Ludwig EW</td>
+                    <td>60 bottles</td>
+                    <td>$15</td>
+                    <td><input type="checkbox" checked data-inventory="true"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Ludwig</td>
+                    <td>60 bottles</td>
+                    <td>$15</td>
+                    <td><input type="checkbox" checked data-inventory="true"></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                  <td id="countTotal" colspan="5"></td> <!-- Cell to display total amount of bottles -->
+                </tr>
+              </tfoot>
+        </table>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var table = $('#wineTable').DataTable();
+
+            // Custom filtering function
+            $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+                var filter = $('#inventorySelect').val();
+                var inInventory = $(table.row(dataIndex).node()).find('input[type="checkbox"]').prop('checked');
+
+                if (filter === 'all') {
+                    return true; // Show all rows
+                } else if (filter === 'inventory' && inInventory) {
+                    return true; // Show rows where the checkbox is checked
+                } else if (filter === 'shop' && !inInventory) {
+                    return true; // Show rows where the checkbox is not checked
+                }
+                return false; // Hide row
+            });
+
+            // Trigger filtering whenever the inventorySelect changes
+            $('#inventorySelect').on('change', function () {
+                table.draw(); // Redraw the table to apply the filter
+            });
+
+            // Existing wineSelect search logic
+            $('#wineSelect').on('change', function () {
+                var wine = $(this).val();
+                if (wine === 'all') {
+                    table.search('').draw(); // Clear search input if "All Wines" is selected
+                } else {
+                    table.search(wine).draw();
+                }
+            });
+              // Calculate and display total amount of bottles combined
+  function calculateTotalBottles() {
+    var total = 0;
+    $('#wineTable tbody tr').each(function() {
+      var amountText = $(this).find('td:eq(2)').text(); // Get the text from the third column
+      var amount = parseInt(amountText.split(' ')[0]); // Extract the number part and convert to integer
+      total += amount;
+    });
+    $('#countTotal').text('Total Bottles: ' + total);
+  }
+
+  // Call the function initially and whenever the table is redrawn
+  calculateTotalBottles();
+  $('#wineTable').on('draw.dt', function() {
+    calculateTotalBottles();
+  });
+
+ // Populate the "Count" column with consecutive numbers
+ function populateCountColumn() {
+    var pageInfo = table.page.info();
+    var start = pageInfo.start;
+    var length = pageInfo.length;
+    var recordsDisplayed = pageInfo.recordsDisplay;
+    var currentPage = Math.floor(start / length) + 1;
+    var count = (currentPage - 1) * length + 1;
+
+    table.rows({ page: 'current' }).every(function (rowIdx, tableLoop, rowLoop) {
+      $(this.node()).find('td:eq(0)').text(count++); // Set the count in the first column and increment
+    });
+  }
+
+  // Call the function initially and whenever the table is redrawn
+  populateCountColumn();
+  $('#wineTable').on('draw.dt', function() {
+    populateCountColumn();
+  });
+        });
+        
+
+        $(document).ready(function () {
+            // Other DataTable initialization code
+
+            // Initialize Select2 on #wineSelect
+            $('#wineSelect').select2({
+                placeholder: "Select a wine",
+                allowClear: true,
+                width: '100%'
+
+            });
+
+            // Modify existing event handlers to work with Select2 if necessary
+        });
+        
+
+    </script>
+</body>
+
+</html>
